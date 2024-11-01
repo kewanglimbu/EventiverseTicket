@@ -136,7 +136,6 @@ namespace EventiverseTicket.Admin.Mobile.ViewModels
                     _showLargeImage = value;
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(ShowSmallImage));
-
                 }
             }
         }
