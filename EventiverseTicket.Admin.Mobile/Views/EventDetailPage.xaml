@@ -11,7 +11,21 @@
                     <!--  Name  -->
                     <Label Style="{StaticResource TitleLabelStyle}" Text="{Binding Name}" />
 
-                    <Image Source="{Binding ImageUrl}" WidthRequest="100" />
+                    <HorizontalStackLayout>
+                        <CheckBox IsChecked="{Binding ShowLargeImage}" Color="Green" />
+                        <Label Text="Show Full Image" />
+
+                    </HorizontalStackLayout>
+
+                    <Image
+                        IsVisible="{Binding ShowSmallImage}"
+                        Source="{Binding ImageUrl, Mode=OneWay}"
+                        WidthRequest="80" />
+                    <Image
+                        HorizontalOptions="Fill"
+                        IsVisible="{Binding ShowLargeImage}"
+                        Source="{Binding ImageUrl, Mode=OneWay}"
+                        WidthRequest="250" />
 
                     <Grid RowDefinitions="Auto,*">
                         <Grid

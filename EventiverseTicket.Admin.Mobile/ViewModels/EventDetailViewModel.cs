@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace EventiverseTicket.Admin.Mobile.ViewModels
 {
-    public class EventDetailViewModel: INotifyPropertyChanged
+    public class EventDetailViewModel : INotifyPropertyChanged
     {
         private Guid _eventId;
         private string _name;
@@ -15,6 +15,7 @@ namespace EventiverseTicket.Admin.Mobile.ViewModels
         private string _descriptions;
         private List<string> _artists = new();
         private CategoryViewModel _category = new();
+        private bool _showLargeImage;
 
         public Guid EventId
         {
@@ -124,6 +125,25 @@ namespace EventiverseTicket.Admin.Mobile.ViewModels
                 }
             }
         }
+
+        public bool ShowLargeImage
+        {
+            get => _showLargeImage;
+            set
+            {
+                if(!Equals(_showLargeImage, value))
+                {
+                    _showLargeImage = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(ShowSmallImage));
+
+                }
+            }
+        }
+
+        public bool ShowSmallImage => !ShowLargeImage;
+      
+
         public EventDetailViewModel()
         {
             EventId = Guid.NewGuid();
