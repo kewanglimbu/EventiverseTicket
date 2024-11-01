@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace EventiverseTicket.Admin.Mobile.ViewModels
 {
@@ -15,7 +16,7 @@ namespace EventiverseTicket.Admin.Mobile.ViewModels
                 if (!value.Equals(_id))
                 {
                     _id = value;
-                    OnPropertyChanged(nameof(Id));
+                    OnPropertyChanged();
                 }
             }
         }
@@ -27,12 +28,13 @@ namespace EventiverseTicket.Admin.Mobile.ViewModels
                 if (!value.Equals(_name))
                 {
                     _name = value;
-                    OnPropertyChanged(nameof(Name));
+                    OnPropertyChanged();
                 }
             }
         }
 
-        public void OnPropertyChanged(string propertyName)
+        // automatically obtain the name of the property that call this method
+        public void OnPropertyChanged([CallerMemberName] string? propertyName = null)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         public event PropertyChangedEventHandler? PropertyChanged;

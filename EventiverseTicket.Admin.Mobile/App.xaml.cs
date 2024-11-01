@@ -1,4 +1,6 @@
-﻿namespace EventiverseTicket.Admin.Mobile
+﻿using EventiverseTicket.Admin.Mobile.Views;
+
+namespace EventiverseTicket.Admin.Mobile
 {
     public partial class App : Application
     {
@@ -6,7 +8,7 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new EventDetailPage();
         }
     }
 }
