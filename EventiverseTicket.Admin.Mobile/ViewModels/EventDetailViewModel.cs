@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 namespace EventiverseTicket.Admin.Mobile.ViewModels
 {
@@ -74,6 +75,7 @@ namespace EventiverseTicket.Admin.Mobile.ViewModels
                 {
                     _status = value;
                     OnPropertyChanged();
+                    ((Command)CancelEventCommand).ChangeCanExecute();
                 }
             }
         }
@@ -86,6 +88,7 @@ namespace EventiverseTicket.Admin.Mobile.ViewModels
                 {
                     _date = value;
                     OnPropertyChanged();
+                    ((Command)CancelEventCommand).ChangeCanExecute();
                 }
             }
         }
@@ -142,9 +145,13 @@ namespace EventiverseTicket.Admin.Mobile.ViewModels
 
         public bool ShowSmallImage => !ShowLargeImage;
       
+        public ICommand CancelEventCommand { get; }
+        private void CancelEvent() => Status = EventStatusEnum.Cancelled;
+        private bool CanCancelEvent() => Status != EventStatusEnum.Cancelled && Date.AddHours(-6) > DateTime.Now;
 
         public EventDetailViewModel()
         {
+            CancelEventCommand = new Command(CancelEvent, CanCancelEvent);
             EventId = Guid.NewGuid();
             Name = "Sample Event";
             Price = 150;
